@@ -1,4 +1,4 @@
--- tạo tài khoản cho 36 nhân viên
+-- create user for Employees
 create user nv01 identified by nv01;
 create user nv02 identified by nv02;
 create user nv03 identified by nv03;
@@ -36,17 +36,17 @@ create user nv34 identified by nv34;
 create user nv35 identified by nv35;
 create user nv36 identified by nv36;
 
--- tạo tài khoản cho ít nhất 5 vị trí 
--- trưởng dự án
-create user  UTrgDuAn identified by truongduan;
+-- create user for Project manager 
+create user pm01 identified by pm01;
 
--- trưởng phòng
-create user UTrgPhg identified by truongphong;
+-- create user for Department chief 
+create user dc01 identified by dc01;
+-- 4 rows
 
--- trưởng chi nhánh
-create user UTrgChiNhanh identified by truongchinhanh;
+-- create user for Branch manager
+create user bm01 identified by bm01;
+-- 4 rows
 
--- giám đốc
-create user UGiamDoc identified by giamdoc;
-
--- tạo ít nhất 5 dòng cho các bảng dữ liệu còn lại 
+-- create user for Director
+create user d01 identified by d01;
+-- 4 rows
