@@ -46,9 +46,6 @@ create user UTrgPhg identified by truongphong;
 -- trưởng chi nhánh
 create user UTrgChiNhanh identified by truongchinhanh;
 
--- nhân viên
-create user UNhanVien identified by nhanvien;
-
 -- giám đốc
 create user UGiamDoc identified by giamdoc;
 
