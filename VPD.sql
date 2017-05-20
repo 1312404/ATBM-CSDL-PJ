@@ -8,34 +8,25 @@ create or replace function view_Inform_Salary(p_schema varchar2, p_obj varchar2)
     UserID varchar2(200);
   begin  
     UserID := SYS_CONTEXT('USERENV','SESSION_USER');
-    if(UserID like 'nv%') then
+    if(UserID like 'Employee') then
       return 
-        'Employee.EmployeeID in (select EmployeeID from Atbmhttt_Lab01.Employee where EmployeeID = ''' || UserID || '''' || ')'; 
+        'Employee.EmployeeID in (select EmployeeID from Atbmhttt_lab01.Employee where EmployeeID = ''' || UserID || '''' || ')'; 
     else
       return '';
   end;
   
--- Assigning Policy function to view InformAndSalary
+-- Assigning Policy function 
 begin
 dbms_rls.add_policy 
 (
-  object_schema     => 'Atbmhttt_Lab01', 
+  object_schema     => 'Atbmhttt_lab01', 
   object_name       => 'Employee', 
   policy_name       => 'view_Inform_Salary_VPD', 
-  function_schema   => 'Atbmhttt_Lab01', 
+  function_schema   => 'Atbmhttt_lab01', 
   policy_function   => 'view_Inform_Salary', 
   statement_types   => 'select, update, insert, delete', 
   sec_relevant_cols => 'Salary',
   update_check      => TRUE
-);
-end;
-
-begin
-dbms_rls.drop_policy
-(
-  object_schema => 'Atbmhttt_Lab01', 
-  object_name   => 'Employee', 
-  policy_name   => 'view_Inform_Salary_VPD'
 );
 end;
 
