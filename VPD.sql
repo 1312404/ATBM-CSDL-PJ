@@ -3,17 +3,21 @@
 
 -- Create VPD Policy Function 
 create or replace function view_Inform_Salary(p_schema varchar2, p_obj varchar2) 
-  return varchar2 
+  return varchar2
   as 
     UserID varchar2(200);
   begin  
-    UserID := SYS_CONTEXT('USERENV','SESSION_USER');
-    if(UserID like 'Employee') then
+    UserID := 'SYS_CONTEXT("USERENV","SESSION_USER")';
+    if(UserID like 'NV%') then
       return 
-        'Employee.EmployeeID in (select EmployeeID from Atbmhttt_lab01.Employee where EmployeeID = ''' || UserID || '''' || ')'; 
+        'Atbmhttt_lab01.Employee.EmployeeID in (select EmployeeID from Atbmhttt_lab01.Employee where EmployeeID = ' || UserID ||')' || 
+        'Atbmhttt_lab01.Branch.BranchManager in (select BranchManager from Atbmhttt_lab01.Branch where BranchManager != ' || UserID || ')' ||
+        'Atbmhttt_lab01.Department.DepartmentChief in (select DepartmentChief from Atbmhttt_lab01.Department where DepartmentChief != ' || UserID || ')' ||
+        'Atbmhttt_lab01.Projects.ProjectManager in (select ProjectManager from Atbmhttt_lab01.Projects where ProjectManager != ' || UserID || ')';
     else
-      return '';
-  end;
+      return null;
+    end if;
+  end view_Inform_Salary;
   
 -- Assigning Policy function 
 begin
@@ -29,4 +33,5 @@ dbms_rls.add_policy
   update_check      => TRUE
 );
 end;
+
 
